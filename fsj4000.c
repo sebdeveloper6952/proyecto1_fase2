@@ -18,38 +18,59 @@ int main()
     while(ping_cm(sensor_pin) > 21) { pause(5); }
     drive_ramp(0,0);
     
-    // cruzar izquierda
-    drive_goto(-26,26);
-    cont_vueltas = -1;
+    cruzar_izquierda();
     
     // seguir pared derecha
     while(cont_vueltas != 0)
     {
-      // revisar a la derecha
-      drive_goto(26,-26);
-      cont_vueltas++;
+      cruzar_derecha();
+     
       // si hay algo, regresar a la izquierda
       if(ping_cm(sensor_pin) < 21)
       {
-        drive_goto(-26,26);
-        cont_vueltas--;
+        cruzar_izquierda();
       }
       // derecha libre, ir a la derecha
       else
       {
-        drive_goto(64,64); 
-      }        
+        drive_goto(64,64);
+        continue;
+      }       
       
       // revisar frente
       // si hay algo, la unica opcion es cruzar a la izquierda
       if(ping_cm(sensor_pin) < 21)
       {
-        drive_goto(-26,26);
-        cont_vueltas--;
+        cruzar_izquierda();
       }
       
-      // avanzar una revolucion
-      drive_goto(64,64);
+      // si el frente esta libre avanzar una revolucion
+      if(ping_cm(sensor_pin) > 26)
+      { 
+        drive_goto(64,64);
+      }             
     }    
   }    
 }
+
+void cruzar_izquierda()
+{
+  drive_goto(-27,27);
+
+  //drive_ramp(0,0);
+  //drive_speed(-38.5,38);
+  //pause(370);
+  
+  cont_vueltas--;
+}
+
+void cruzar_derecha()
+{
+  drive_goto(27,-27);
+  
+  //drive_ramp(0,0);
+  //drive_speed(38.5,-38);
+  //pause(370);
+  
+  cont_vueltas++;
+}    
