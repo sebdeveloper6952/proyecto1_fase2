@@ -13,9 +13,11 @@ int main()
   {
     // avanzar hasta llegar a pared
     
+	
 	drive_ramp(128,128);
     while(ping_cm(front_s_pin) > dist) { pause(5); }
     drive_ramp(0,0);
+
     
     cruzar_izquierda();
     
