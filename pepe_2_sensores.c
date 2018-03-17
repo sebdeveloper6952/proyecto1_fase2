@@ -10,6 +10,8 @@ int distancia = 64;
 int distancia2 = 27;
 int distancia3 = -27;
 
+int vel = 128;
+
 int main()
 {
   while(1)
@@ -17,13 +19,14 @@ int main()
     // avanzar hasta llegar a pared, luego de eso cruzar a la izquierda 
     
 	
-	drive_ramp(128,128);
+	drive_ramp(vel, vel);
     while(ping_cm(front_s_pin) > dist) { pause(5); } 
     drive_ramp(0,0);
 
     
     cruzar_izquierda();
     
+	//while para validar los giros 
     while(turns != 0)
     {
       // ver si hay pared a la derecha
