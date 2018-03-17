@@ -6,16 +6,19 @@ int front_s_pin = 8;
 int right_s_pin = 7;
 int turns = 0;
 int dist = 20;
+int distancia = 64;
+int distancia2 = 27;
+int distancia3 = -27;
 
 int main()
 {
   while(1)
   {
-    // avanzar hasta llegar a pared
+    // avanzar hasta llegar a pared, luego de eso cruzar a la izquierda 
     
 	
 	drive_ramp(128,128);
-    while(ping_cm(front_s_pin) > dist) { pause(5); }
+    while(ping_cm(front_s_pin) > dist) { pause(5); } 
     drive_ramp(0,0);
 
     
@@ -29,7 +32,7 @@ int main()
       {
         // cruzar a la derecha y avanzar una revolucion
         cruzar_derecha();
-        drive_goto(64,64);
+        drive_goto(distancia,distancia);
         continue;
       }
     
@@ -41,29 +44,32 @@ int main()
       }
     
       // avanzar una revolucion
-      drive_goto(64,64);
+      drive_goto(distancia, distancia);
     }
   }    
 }
 
+//cruza a la izquierda 
 void cruzar_izquierda()
 {
-  drive_goto(-27,27);
+  drive_goto(distancia3 , distancia2);
 
   //drive_ramp(0,0);
   //drive_speed(-38.5,38);
   //pause(370);
   
+  // disminuye el contador cada vez que el robot cruce a la izquierda
   turns--;
 }
-
+// cruza a la derecha
 void cruzar_derecha()
 {
-  drive_goto(27,-27);
+  drive_goto(distancia2, distancia3);
   
   //drive_ramp(0,0);
   //drive_speed(38.5,-38);
   //pause(370);
   
+  // aumenta el contador cada vez que el robot cruce a la izquierda
   turns++;
 } 
