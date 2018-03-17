@@ -59,6 +59,9 @@ int main()
   }    
 }
 
+
+//----------------------- DEFINICION DE FUNCIONES ----------------------------------------------------
+
 //mueve las ruedas del robot 27 ticks en sentidos opuestos para lograr que el robot cruce a la izquierda. Le resta al contador para poder hacer cumplir la condicion del loop.
 void cruzar_izquierda()
 {
